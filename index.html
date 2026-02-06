@@ -49,7 +49,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px; /* Reduced outer padding for mobile */
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -89,8 +89,10 @@
 
         /* --- LEFT PANEL (VISUAL) --- */
         .visual-panel {
-            flex: 1; min-width: 400px;
-            padding: 30px; position: relative;
+            flex: 1; 
+            min-width: 400px; /* Only applies on Desktop */
+            padding: 30px; 
+            position: relative;
             color: var(--text-color);
             display: flex; flex-direction: column;
             justify-content: space-between; align-items: flex-start;
@@ -98,7 +100,7 @@
         }
         .image-placeholder {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            /* Replace 'roar_convergence.jpg' with your actual image file */
+            /* Using your specific image */
             background: linear-gradient(135deg, rgba(31, 27, 38, 0.4), rgba(31, 27, 38, 0.7)), url('IMG-20260206-WA0035.jpg');
             background-size: cover; background-position: center;
         }
@@ -115,7 +117,12 @@
         .back-link:hover { background-color: rgba(0, 0, 0, 0.3); }
 
         /* --- RIGHT PANEL (FORM) --- */
-        .form-panel { flex: 1; min-width: 400px; padding: 50px 60px; position: relative; }
+        .form-panel { 
+            flex: 1; 
+            min-width: 400px; /* Default desktop width */
+            padding: 50px 60px; 
+            position: relative; 
+        }
         .form-panel h1 { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
         .form-instruction { font-size: 15px; color: var(--text-secondary); margin-bottom: 30px; }
 
@@ -192,14 +199,38 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* RESPONSIVE */
+        /* --- RESPONSIVE / MOBILE STYLES --- */
         @media (max-width: 900px) {
-            .registration-container { flex-direction: column; max-width: 500px; }
-            .visual-panel { display: none; }
-            .form-panel { padding: 40px 30px; }
+            body { padding: 10px; } /* Less padding on mobile body */
+
+            .registration-container { 
+                flex-direction: column; 
+                max-width: 100%; /* Use full width */
+                width: 100%;
+            }
+
+            .visual-panel { 
+                display: none; /* Hide image on mobile to save space */
+            }
+
+            .form-panel { 
+                padding: 30px 20px; /* Reduced padding for mobile */
+                min-width: auto; /* CRITICAL: Remove the fixed 400px width */
+                width: 100%;
+            }
+
+            .form-panel h1 { font-size: 26px; } /* Smaller Title */
         }
+
         @media (max-width: 500px) {
-            .location-fields, .accommodation-selection { flex-direction: column; gap: 10px; }
+            .location-fields { 
+                flex-direction: column; /* Stack City and State */
+                gap: 15px;
+            }
+            .accommodation-selection { 
+                flex-direction: column; /* Stack Accommodation options */
+                gap: 10px;
+            }
         }
     </style>
 </head>
