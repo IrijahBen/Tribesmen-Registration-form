@@ -260,7 +260,20 @@
                     </div>
                     
                     <input type="email" id="email" placeholder="Email Address" required>
-                    
+
+                    <div class="accommodation-group">
+                        <label>Gender</label>
+                        <div class="accommodation-selection">
+                            <div class="accommodation-option">
+                                <input type="radio" id="gender-male" name="gender" value="Male" required>
+                                <label for="gender-male">Male</label>
+                            </div>
+                            <div class="accommodation-option">
+                                <input type="radio" id="gender-female" name="gender" value="Female">
+                                <label for="gender-female">Female</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="accommodation-group">
                         <label>Accommodation needed?</label>
                         <div class="accommodation-selection">
@@ -318,7 +331,7 @@
         // ==========================================
         // 1. CONFIGURATION: PASTE YOUR SCRIPT URL
         // ==========================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6iIGmQHBqItJ4vlYnhZSIYgYgtJfMgG5v1Bgnj8hNDTtab4bKxW7CLDRKXQ_8j-xXgg/exec'; 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4TLAMcxrcMI_huSa50QiyMn8WBWMQJzpttrWP6P1USEDxcLJAnOmZ6dN8daBr5Httlw/exec'; 
 
         // ==========================================
         // 2. THEME TOGGLE LOGIC
@@ -366,6 +379,19 @@
             formData.append('name', document.getElementById('name').value);
             formData.append('location', document.getElementById('city').value + ", " + document.getElementById('state').value);
             formData.append('email', document.getElementById('email').value);
+            
+            // ADDED GENDER LOGIC & ROOM ASSIGNMENT HERE
+            const genderOption = document.querySelector('input[name="gender"]:checked');
+            const genderValue = genderOption ? genderOption.value : "";
+            formData.append('gender', genderValue);
+            
+            // Straight assignment to Room 1 or Room 2 based on gender
+            if (genderValue === "Male") {
+                formData.append('room', 'Room 1');
+            } else if (genderValue === "Female") {
+                formData.append('room', 'Room 2');
+            }
+            // END ADDED GENDER LOGIC
             
             const accOption = document.querySelector('input[name="accommodation"]:checked');
             formData.append('accommodation', accOption ? accOption.value : "No");
